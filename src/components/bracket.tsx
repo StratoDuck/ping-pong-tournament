@@ -120,9 +120,16 @@ const Bracket = () => {
 
   const fetchMatches = async () => {
     setIsLoading(true);
-    const res = await fetch("http://localhost:3000/api/match", {
-      next: { revalidate: 0 },
-    });
+    const res = await fetch(
+      `https://${
+        process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+          ? process.env.NEXT_PUBLIC_VERCEL_URL
+          : "http://localhost:3000"
+      }/api/match`,
+      {
+        next: { revalidate: 0 },
+      }
+    );
     const data = await res.json();
     setMatches(data);
     setIsLoading(false);
@@ -184,24 +191,38 @@ const Bracket = () => {
     const winnerIdx = scores[0] > scores[1] ? 0 : 1;
     await Promise.all([
       ...(modalMatch?.participants.map((participant, idx) =>
-        fetch("http://localhost:3000/api/participant", {
-          method: "PATCH",
+        fetch(
+          `https://${
+            process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+              ? process.env.NEXT_PUBLIC_VERCEL_URL
+              : "http://localhost:3000"
+          }/api/participant`,
+          {
+            method: "PATCH",
+            body: JSON.stringify({
+              matchId: participant.matchId,
+              playerId: participant.playerId,
+              score: scores[idx],
+            }),
+            next: { revalidate: 0 },
+          }
+        )
+      ) || []),
+      fetch(
+        `https://${
+          process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+            ? process.env.NEXT_PUBLIC_VERCEL_URL
+            : "http://localhost:3000"
+        }/api/participant`,
+        {
+          method: "POST",
           body: JSON.stringify({
-            matchId: participant.matchId,
-            playerId: participant.playerId,
-            score: scores[idx],
+            matchId: modalMatch?.nextMatchId,
+            playerId: modalMatch?.participants[winnerIdx].playerId,
           }),
           next: { revalidate: 0 },
-        })
-      ) || []),
-      fetch("http://localhost:3000/api/participant", {
-        method: "POST",
-        body: JSON.stringify({
-          matchId: modalMatch?.nextMatchId,
-          playerId: modalMatch?.participants[winnerIdx].playerId,
-        }),
-        next: { revalidate: 0 },
-      }),
+        }
+      ),
     ]);
     setIsSaving(false);
     fetchMatches();
