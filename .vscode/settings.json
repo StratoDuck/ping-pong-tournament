@@ -1,0 +1,160 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "auto-close-tag.disableOnLanguage": ["typescript"],
+  "cSpell.words": [
+    "automations",
+    "Backoffice",
+    "BDAY",
+    "beemail",
+    "beesafe",
+    "booleancheckbox",
+    "brainhubeu",
+    "browserslist",
+    "Calendly",
+    "carta",
+    "chartjs",
+    "codegen",
+    "colorify",
+    "copyfiles",
+    "craco",
+    "Crunchbase",
+    "cypher",
+    "DATATIME",
+    "datepicker",
+    "datestamp",
+    "datetime",
+    "Docusign",
+    "ebdeal",
+    "Einav",
+    "equitybee",
+    "esop",
+    "exceljs",
+    "EXPLORIUM",
+    "FIELDTYPE",
+    "firestore",
+    "fundit",
+    "gcloud",
+    "Glassboard",
+    "hassanmojab",
+    "hubspot",
+    "Idology",
+    "IMPP",
+    "Khvolis",
+    "libphonenumber",
+    "luxon",
+    "Mailosaur",
+    "Millis",
+    "mixpanel",
+    "NCPS",
+    "pipedrive",
+    "Pitchbook",
+    "postbuild",
+    "postsetup",
+    "preinstall",
+    "presetup",
+    "PTEP",
+    "rebrand",
+    "Rebranded",
+    "rebranding",
+    "Redlock",
+    "rellax",
+    "retryable",
+    "shob",
+    "Signup",
+    "sllc",
+    "SLOWLOG",
+    "svgr",
+    "Syncer",
+    "testid",
+    "testim",
+    "toastify",
+    "unflatten",
+    "Urlredirect",
+    "uuidv",
+    "Yaacobi",
+    "zxcvbn"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.workingDirectories": [
+    {
+      "changeProcessCWD": true,
+      "directory": "api"
+    },
+    {
+      "changeProcessCWD": true,
+      "directory": "backoffice"
+    },
+    {
+      "changeProcessCWD": true,
+      "directory": "client"
+    },
+    {
+      "changeProcessCWD": true,
+      "directory": "gateway"
+    },
+    {
+      "changeProcessCWD": true,
+      "directory": "shared-constants"
+    },
+    {
+      "changeProcessCWD": true,
+      "directory": "shared-services"
+    },
+    {
+      "changeProcessCWD": true,
+      "directory": "task-manager"
+    }
+  ],
+  "githubPullRequests.queries": [
+    {
+      "label": "Demand-Squad PR's",
+      "query": "is:open is:pr label:demand-squad"
+    },
+    {
+      "label": "employee-Squad PR's",
+      "query": "is:open is:pr label:employee-squad"
+    },
+    {
+      "label": "Marketing-Squad PR's",
+      "query": "is:open is:pr label:marketing-squad"
+    },
+    {
+      "label": "Os-Squad PR's",
+      "query": "is:open is:pr label:os-squad"
+    },
+    {
+      "label": "Waiting For My Review",
+      "query": "is:open review-requested:${user}"
+    },
+    {
+      "label": "Assigned To Me",
+      "query": "is:open assignee:${user}"
+    },
+    {
+      "label": "Created By Me",
+      "query": "is:open author:${user}"
+    }
+  ],
+  "javascript.validate.enable": false,
+  "search.exclude": {
+    ".git": true,
+    "**/bower_components": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/lib": true,
+    "**/lib-amd": true,
+    "**/node_modules": true,
+    "**/temp": true,
+    "**/test/**/temp": false
+  },
+  "typescript.validate.enable": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
