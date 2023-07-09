@@ -158,7 +158,7 @@ const Bracket = () => {
     startTime: "",
   }));
 
-  const handleModalToggle = (event?) => {
+  const handleModalToggle = (event?: any) => {
     if (event && event.match.participants.length < 2) {
       return;
     }
@@ -223,16 +223,23 @@ const Bracket = () => {
             options={{
               style: {
                 roundHeader: {
+                  // @ts-ignore
                   backgroundColor: GlootTheme.roundHeader.backgroundColor,
+                  // @ts-ignore
                   fontColor: GlootTheme.roundHeader.fontColor,
                 },
+                // @ts-ignore
                 connectorColor: GlootTheme.connectorColor,
+                // @ts-ignore
                 connectorColorHighlight: GlootTheme.connectorColorHighlight,
               },
             }}
             svgWrapper={({ children, ...props }) => (
+              // @ts-ignore
               <SVGViewer
+                // @ts-ignore
                 background={GlootTheme.svgBackground}
+                // @ts-ignore
                 SVGBackground={GlootTheme.svgBackground}
                 width={finalWidth}
                 height={finalHeight}
