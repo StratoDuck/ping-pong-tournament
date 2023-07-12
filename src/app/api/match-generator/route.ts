@@ -6,6 +6,8 @@ import { PrismaClient, Match } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export const revalidate = 0;
+
 type RawMatch = {
   id: {
     s: number;

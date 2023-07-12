@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export const revalidate = 0;
+
 export async function POST(request: Request) {
   const participant = await prisma.participant.create({
     data: await request.json(),
