@@ -121,13 +121,14 @@ const Bracket = () => {
   const fetchMatches = async () => {
     setIsLoading(true);
     const res = await fetch(
-      `https://${
+      `${
         process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-          ? process.env.NEXT_PUBLIC_VERCEL_URL
+          ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL
           : "http://localhost:3000"
       }/api/match`,
       {
         next: { revalidate: 0 },
+        cache: "no-store",
       }
     );
     const data = await res.json();
@@ -192,9 +193,9 @@ const Bracket = () => {
     await Promise.all([
       ...(modalMatch?.participants.map((participant, idx) =>
         fetch(
-          `https://${
+          `${
             process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-              ? process.env.NEXT_PUBLIC_VERCEL_URL
+              ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL
               : "http://localhost:3000"
           }/api/participant`,
           {
@@ -205,13 +206,14 @@ const Bracket = () => {
               score: scores[idx],
             }),
             next: { revalidate: 0 },
+            cache: "no-store",
           }
         )
       ) || []),
       fetch(
-        `https://${
+        `${
           process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-            ? process.env.NEXT_PUBLIC_VERCEL_URL
+            ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL
             : "http://localhost:3000"
         }/api/participant`,
         {
@@ -221,6 +223,7 @@ const Bracket = () => {
             playerId: modalMatch?.participants[winnerIdx].playerId,
           }),
           next: { revalidate: 0 },
+          cache: "no-store",
         }
       ),
     ]);
