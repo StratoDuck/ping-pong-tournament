@@ -127,7 +127,7 @@ const Bracket = () => {
           : "http://localhost:3000"
       }/api/match`,
       {
-        next: { revalidate: 0 },
+        // next: { revalidate: 0 },
         cache: "no-store",
       }
     );
@@ -205,7 +205,7 @@ const Bracket = () => {
               playerId: participant.playerId,
               score: scores[idx],
             }),
-            next: { revalidate: 0 },
+            // next: { revalidate: 0 },
             cache: "no-store",
           }
         )
@@ -222,7 +222,7 @@ const Bracket = () => {
             matchId: modalMatch?.nextMatchId,
             playerId: modalMatch?.participants[winnerIdx].playerId,
           }),
-          next: { revalidate: 0 },
+          // next: { revalidate: 0 },
           cache: "no-store",
         }
       ),
