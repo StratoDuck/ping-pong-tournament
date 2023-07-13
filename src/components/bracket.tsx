@@ -18,6 +18,14 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { set } from "lodash";
+import {
+  Table,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableBody,
+  TableCell,
+} from "./ui/table";
 
 const SingleEliminationBracket = dynamic(
   () =>
@@ -92,6 +100,7 @@ const Bracket = () => {
   };
 
   const [windowSize, setWindowSize] = useState(getWindowSize());
+  const [players, setPlayers] = useState<Player[]>([]);
   const [matches, setMatches] = useState<
     (Match & { participants?: (Participant & { player: Player })[] })[]
   >([]);
@@ -118,6 +127,24 @@ const Bracket = () => {
   const finalWidth = Math.max(windowSize.width - 50, 500);
   const finalHeight = Math.max(windowSize.height - 200, 500);
 
+  const fetchPlayers = async () => {
+    setIsLoading(true);
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+          ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL
+          : "http://localhost:3000"
+      }/api/player`,
+      {
+        // next: { revalidate: 0 },
+        cache: "no-store",
+      }
+    );
+    const data = await res.json();
+    setPlayers(data);
+    setIsLoading(false);
+  };
+
   const fetchMatches = async () => {
     setIsLoading(true);
     const res = await fetch(
@@ -137,6 +164,8 @@ const Bracket = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
+    fetchPlayers();
     fetchMatches();
   }, []);
 
@@ -238,7 +267,7 @@ const Bracket = () => {
         Tournament Bracket
         {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
       </h1>
-      {!!matches.length && (
+      {!!matches.length ? (
         <>
           <SingleEliminationBracket
             matches={uiMatches}
@@ -320,6 +349,23 @@ const Bracket = () => {
             </DialogContent>
           </Dialog>
         </>
+      ) : !!players.length ? (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {players.map((player) => (
+              <TableRow key={player.id}>
+                <TableCell>{player.name}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : (
+        <></>
       )}
     </div>
   );
